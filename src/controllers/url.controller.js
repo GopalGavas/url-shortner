@@ -19,9 +19,12 @@ const generateShortUrl = asyncHandler(async (req, res) => {
     visitHistory: [],
   });
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, shortId, "short Id generated successfully"));
+  return res.render("home", {
+    id: shortId,
+  });
+  // return res
+  //   .status(200)
+  //   .json(new ApiResponse(200, shortId, "short Id generated successfully"));
 });
 
 const redirectURL = asyncHandler(async (req, res) => {
