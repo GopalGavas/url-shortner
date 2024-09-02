@@ -57,10 +57,8 @@ const loginUser = asyncHandler(async (req, res) => {
     });
   }
 
-  const sessionID = uuidv4();
-  setUser(sessionID, user);
-
-  res.cookie("uid", sessionID);
+  const token = setUser(user);
+  res.cookie("uid", token);
 
   return res.redirect("/");
 });
