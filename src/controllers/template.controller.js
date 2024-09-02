@@ -8,4 +8,12 @@ const renderHomePage = asyncHandler(async (req, res) => {
   });
 });
 
-export { renderHomePage };
+const renderSignUp = asyncHandler(async (req, res) => {
+  return res.render("signup");
+});
+
+const renderLogin = asyncHandler(async (req, res) => {
+  return res.render("login");
+});
+
+export { renderHomePage, renderSignUp, renderLogin };

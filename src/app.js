@@ -11,10 +11,12 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./src/views"));
 
 // Routes
-import urlRoute from "./routes/url.routes.js";
-import staticRoute from "./routes/static.routes.js";
+import urlRouter from "./routes/url.routes.js";
+import staticRouter from "./routes/static.routes.js";
+import userRouter from "./routes/user.routes.js";
 
-app.use("/url", urlRoute);
-app.use("/", staticRoute);
+app.use("/url", urlRouter);
+app.use("/user", userRouter);
+app.use("/", staticRouter);
 
 export { app };
