@@ -1,6 +1,8 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { ApiError } from "../utils/apiError.js";
 import { User } from "../models/user.model.js";
+import { v4 as uuidv4 } from "uuid";
+import { setUser } from "../service/auth.js";
 
 const registerUser = asyncHandler(async (req, res) => {
   const { fullName, email, password } = req.body;
@@ -54,6 +56,11 @@ const loginUser = asyncHandler(async (req, res) => {
       error: "Invalid email or password",
     });
   }
+
+  const sessionID = uuidv4();
+  setUser(sessionID, user);
+
+  res.cookie("uid", sessionID);
 
   return res.redirect("/");
 });

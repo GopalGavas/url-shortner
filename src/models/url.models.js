@@ -18,6 +18,11 @@ const urlSchema = new Schema(
         timestamps: { type: Number },
       },
     ],
+
+    createdBy: {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
   },
   { timestamps: true }
 );

@@ -2,7 +2,8 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import { URL } from "../models/url.models.js";
 
 const renderHomePage = asyncHandler(async (req, res) => {
-  const allUrls = await URL.find({});
+  if (!req.user) return res.redirect("/login");
+  const allUrls = await URL.find({ createdBy: req.user?._id });
   return res.render("home", {
     urls: allUrls,
   });
