@@ -1,8 +1,14 @@
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { URL } from "../models/url.models.js";
 
+const adminAccess = asyncHandler(async (req, res) => {
+  const allUrls = await URL.find({});
+  return res.render("home", {
+    urls: allUrls,
+  });
+});
+
 const renderHomePage = asyncHandler(async (req, res) => {
-  if (!req.user) return res.redirect("/login");
   const allUrls = await URL.find({ createdBy: req.user?._id });
   return res.render("home", {
     urls: allUrls,
@@ -17,4 +23,4 @@ const renderLogin = asyncHandler(async (req, res) => {
   return res.render("login");
 });
 
-export { renderHomePage, renderSignUp, renderLogin };
+export { adminAccess, renderHomePage, renderSignUp, renderLogin };
